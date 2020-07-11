@@ -1,10 +1,18 @@
 <template>
   <v-container>
     <v-row align="start" justify="space-around">
+      <v-col v-show="things.length==0" cols="6">
+        <v-card>
+          <v-card-title>There is nothing in your list, please add one</v-card-title>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="orange" text route to="/add">add</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
       <v-col cols="6" v-for="(thing, index) in things" :key="thing.thing">
         <v-card>
           <v-card-title>{{thing.thing}}</v-card-title>
-
           <v-card-subtitle>
             <v-icon small>mdi-star</v-icon>
             {{thing.urgency}}
@@ -16,11 +24,11 @@
             <v-btn icon link large route to="/change">
               <v-icon>mdi-pen</v-icon>
             </v-btn>
-            <v-btn icon link large @click="deleteThing(thing)">
+            <v-btn icon link large @click="deleteThing(thing);reloadThings()">
               <v-icon>mdi-trash-can</v-icon>
             </v-btn>
 
-            <v-btn icon link large @click="changeDone(thing)">
+            <v-btn icon link large @click="changeDone(thing);reloadThings()">
               <v-icon>mdi-check</v-icon>
             </v-btn>
             <v-btn icon link large @click="stop = !stop">
@@ -110,6 +118,9 @@ export default Vue.extend({
     changeShow(index) {
       this.things[index].isShow = !this.things[index].isShow;
       console.log("method: changeShow");
+    },
+    reloadThings() {
+      this.things = this.getIsProcessing();
     }
   }
 });

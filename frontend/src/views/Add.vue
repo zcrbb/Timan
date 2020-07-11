@@ -4,9 +4,9 @@
       <v-container>
         <!-- <p>{{thing}}</p> -->
         <h2 class="text-center py-5 grey--text text--darken-1">Add a New Thing</h2>
-        <v-row justify="center" class="mx-auto">
+        <v-row class="mx-auto">
           <!-- 时间名称 -->
-          <v-col cols="9">
+          <v-col cols="12">
             <v-text-field v-model="thing.thing" label="Thing" outlined autofocus clearable></v-text-field>
           </v-col>
           <!-- 事件紧要度 -->
@@ -68,18 +68,38 @@
             <v-slider
               class="pt-7"
               step="1"
-              max="7"
               min="0"
+              max="7"
               thumb-label="always"
               v-model="thing.patient"
-              prepend-icon="mdi-bee-flower "
+              prepend-icon="mdi-bee-flower"
             ></v-slider>
           </v-col>
+          <!-- 事件是否为周期性 -->
+          <v-col cols="1" class="pa-3">
+            <!-- <v-subheader style="font-size:1.2em">is periodic?</v-subheader> -->
+            <v-checkbox v-model="isPeriodic" label="Periodic"></v-checkbox>
+          </v-col>
+
+          <v-col cols="5" v-show="isPeriodic">
+            <v-subheader style="font-size:1.2em">Once every {{frequency}} days</v-subheader>
+            <v-slider
+              class="pt-7"
+              step="1"
+              max="7"
+              min="1"
+              thumb-label="always"
+              v-model="frequency"
+              prepend-icon="mdi-bee-flower"
+            >
+              <template v-slot:append></template>
+            </v-slider>
+          </v-col>
+
           <!-- 事件时长 -->
           <v-col cols="6" class="pl-15">
             <v-subheader style="font-size:1.2em">duration</v-subheader>
             <v-time-picker
-              width="300"
               v-model="thing.time"
               format="24hr"
               scrollable
@@ -87,16 +107,21 @@
             ></v-time-picker>
           </v-col>
           <!-- DDL -->
-          <v-col cols="6" class="text-center">
+          <v-col cols="6">
             <v-subheader style="font-size:1.2em">DDL</v-subheader>
             <v-date-picker v-model="thing.ddl" elevation="15" full-width></v-date-picker>
           </v-col>
 
+          <v-col cols="6" class="text-center">
+            <v-subheader style="font-size:1.2em">Choose a color for it</v-subheader>
+            <v-spacer></v-spacer>
+            <v-color-picker v-model="color" class="ml-15"></v-color-picker>
+          </v-col>
+
           <!-- 备注 -->
-          <v-col cols="6" class="pt-12">
+          <v-col cols="6" class="pt-12" justify="center">
             <v-textarea
               class="pt-2"
-              height="380"
               filled
               label="Remarks"
               auto-grow
@@ -108,7 +133,9 @@
           <v-col cols="12" class="text-center pa-16">
             <v-btn rounded width="500" color="indigo" dark to="/add" @click="save(thing)">Start</v-btn>
           </v-col>
-          {{thing}}
+
+          <v-card>isPeriodic: {{isPeriodic}}</v-card>
+          <v-card>{{thing}}</v-card>
         </v-row>
       </v-container>
     </v-form>
@@ -137,7 +164,11 @@ export default {
         remark: "",
         isShow: false,
         done: false
-      }
+      },
+      color: "",
+      isPeriodic: false,
+      frequency: ""
+      // items: ["Once", "Periodic"]
     };
   },
   computed: {
