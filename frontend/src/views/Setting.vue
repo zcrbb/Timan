@@ -11,7 +11,7 @@
           <span>forget your permisson</span>
         </v-btn>
       </v-col>
-      <v-overlay :absolute="absolute" :opacity="opacity" :value="overlay">
+      <v-overlay :absolute="false" opacity="0.5" :value="overlay">
         <v-card class="mx-auto" max-width="344" light>
           <v-card-text>
             <div>Warning</div>
@@ -33,8 +33,6 @@ import { mapMutations } from "vuex";
 export default {
   data() {
     return {
-      absolute: false,
-      opacity: 0.5,
       overlay: false
     };
   },

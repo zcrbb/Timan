@@ -32,6 +32,10 @@ export interface Thing {
   done: boolean;
   // 完成时间, (点击完成的时间)
   doneDate: string;
+  // 连续事件频率
+  frequency: number;
+  // 事件颜色
+  color: string;
 }
 
 export interface State {

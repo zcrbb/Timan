@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-row align="start" justify="space-around">
-      <v-col v-show="things.length==0" cols="6">
-        <v-card>
+    <v-row align="start" justify="space-around" transition="scale-transition">
+      <v-col v-show="things.length==0" cols="6" transition="scale-transition">
+        <v-card transition="scale-transition">
           <v-card-title>There is nothing in your list, please add one</v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -11,14 +11,14 @@
         </v-card>
       </v-col>
       <v-col cols="6" v-for="(thing, index) in things" :key="thing.thing">
-        <v-card>
+        <v-card transition="scale-transition">
           <v-card-title>{{thing.thing}}</v-card-title>
           <v-card-subtitle>
             <v-icon small>mdi-star</v-icon>
             {{thing.urgency}}
           </v-card-subtitle>
           <!-- 时间进度条 -->
-          <!-- <v-progress-linear color="primary" :buffer-value="100" stream></v-progress-linear> -->
+          <v-progress-linear :color="thing.color" :buffer-value="100" stream></v-progress-linear>
 
           <v-card-actions>
             <v-btn icon link large route to="/change">
