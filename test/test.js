@@ -1,24 +1,43 @@
-// let student = {
-//   name: "aruix",
-//   id: "182342",
-//   time: "12:23",
-// };
-// let hahaClass = [];
+// 设定的总时间
+let time = 20;
+// 走过的时间
+let duration = 0;
+// 进行百分比 = 走过的时间 / 设定的时间
+let processing = 0;
+// 计时器
+let counting = null;
 
-// for (let i = 0; i < 5; i++) {
-//   hahaClass[i] = student;
-// }
-// for (let st in student) {
-//   console.log(`${st}: ${student[st]}`);
-// }
-// var total = [0, 1, 2, 3].reduce((total, num) => total + num);
-
-// console.log(total);
-var arr = [1,2,3,4,5]
-var result = arr.some(function (item,index) {
-    return item > 3
-});
-haha(fa){
-    return haha;
+function startCounting(counting, time, duration) {
+  console.log("开始了!");
+  let processing = 0;
+  counting = setInterval(() => {
+    if (time - duration > 0) {
+      duration++;
+      console.log("duration: " + duration);
+      processing = parseInt((duration * 100) / time);
+      console.log("processing: " + processing);
+      //
+      setTimeout(() => {
+        clearInterval(counting);
+        console.log("停止了");
+      }, 2000);
+    } else {
+      console.log("time out");
+      clearInterval(counting);
+      return;
+    }
+  }, 1000);
 }
-console.log(result);
+
+// function stopInterval(counting, time, duration) {
+//   clearInterval(counting);
+//   console.log("stopInterval");
+// }
+
+startCounting(counting, time, duration);
+
+// // clearInterval(counting);
+// setTimeout(() => {
+//   clearInterval(counting);
+//   console.log("停止了");
+// }, 2000);

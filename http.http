@@ -1,0 +1,43 @@
+###
+
+POST http://localhost:7022/home/add
+content-type: application/json
+
+{
+"user":"5",
+// 事件名称
+"thing": "1",
+// 事件紧急度
+"urgency": "1",
+// 四个要素, 用于统计, 每个都是1-5
+"interest": "1",
+"mental": "1",
+"physical": "1",
+"patient": "1",
+// 总共的时间
+"time": "1",
+// 进行过的时间
+"duration": "1",
+// ddl
+"ddl": "2020-01-01",
+// 备注
+"remark": "1"
+}
+
+
+
+###
+
+GET http://localhost:7022/greeting/find HTTP/1.1
+
+
+###
+
+POST http://localhost:7022/greeting/add HTTP/1.1
+content-type: application/json
+
+{
+    "content": "这是没有用的东西",
+    "remark": "加油!!!",
+    "trash": "这是没有用的东西"
+}

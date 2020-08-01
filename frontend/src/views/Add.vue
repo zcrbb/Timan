@@ -215,6 +215,7 @@ export default {
       }
       thing.duration = 0;
       thing.thingId = this.getNowIndex;
+      thing.stop = true;
       thing.isShow = false;
       thing.done = false;
       this.addThing(thing);
